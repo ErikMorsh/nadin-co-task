@@ -5,17 +5,14 @@
         class="bg-backgroundSecondary pa-3 d-flex flex-column align-center"
         elevation="5"
       >
-        <h1 class="my-10 text-h2">{{ getTime() }}</h1>
-        <h2 class="mb-10 text-h4">Good morning, UserName</h2>
+        <TodoList />
       </v-card>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useGlobalStore } from "@/stores/global-store";
-
-const { getTime } = useGlobalStore();
+import TodoList from "./TodoList.vue";
 </script>
 
 <style scoped></style>

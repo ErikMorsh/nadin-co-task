@@ -25,7 +25,7 @@
             'text-primary': hasActiveChild(option.children),
           }"
         >
-          Dashboard
+          {{ option.name }}
         </p>
         <v-spacer></v-spacer>
         <v-icon
@@ -38,7 +38,7 @@
       </div>
 
       <!-- Link Itself -->
-      <router-link v-else :to="{ name: 'dashboard' }">
+      <router-link v-else :to="{ name: option.to }">
         <div
           class="links w-100 px-5 py-3 d-flex text-BandW"
           v-ripple
@@ -53,7 +53,7 @@
               'text-primary': option.selfStatus,
             }"
           >
-            Dashboard
+            {{ option.name }}
           </p>
         </div>
       </router-link>
@@ -135,30 +135,39 @@ const options: IOption[] = reactive([
   },
   {
     id: 2,
-    name: "users",
-    to: "users",
-    icon: "account-multiple-outline",
+    name: "todos",
+    to: "todos",
+    icon: "checkbox-marked-circle-auto-outline",
     children: [],
     childStatus: false,
     selfStatus: false,
   },
   {
     id: 3,
-    name: "auth",
-    to: "auth",
-    icon: "account-key-outline",
+    name: "weather",
+    to: "weather",
+    icon: "weather-cloudy",
     children: [
-      {
-        name: "Login",
-        to: "login",
-        selfStatus: false,
-      },
+      // {
+      //   name: "Login",
+      //   to: "login",
+      //   selfStatus: false,
+      // },
       //   {
       //     name: "sign up",
       //     to: "signup",
       //     selfStatus: false,
       //   },
     ],
+    childStatus: false,
+    selfStatus: false,
+  },
+  {
+    id: 4,
+    name: "profile",
+    to: "profile",
+    icon: "account-outline",
+    children: [],
     childStatus: false,
     selfStatus: false,
   },

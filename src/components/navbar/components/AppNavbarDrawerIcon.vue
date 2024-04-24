@@ -4,10 +4,10 @@
       @click="handleDrawerClick"
       icon
       variant="text"
-      :color="drawerState ? 'primary' : ''"
+      :color="sidebarStore.drawerState ? 'primary' : ''"
     >
       <transition name="d" mode="out-in">
-        <v-icon v-if="drawerState"> mdi-close </v-icon>
+        <v-icon v-if="sidebarStore.drawerState"> mdi-close </v-icon>
         <v-icon v-else> mdi-menu </v-icon>
       </transition>
     </v-btn>
@@ -22,10 +22,6 @@ const sidebarStore = useSidebarStore();
 function handleDrawerClick() {
   sidebarStore.toggleDrawer();
 }
-
-const drawerState = computed<boolean>(() => {
-  return sidebarStore.getDrawerState();
-});
 </script>
 
 <style scoped>

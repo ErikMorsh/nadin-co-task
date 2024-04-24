@@ -19,6 +19,21 @@ const router = createRouter({
           path: "dashboard",
           component: () => import("../views/admin/dashboard/Dashboard.vue"),
         },
+        {
+          name: "todos",
+          path: "todos",
+          component: () => import("../views/admin/todos/Todos.vue"),
+        },
+        {
+          name: "weather",
+          path: "weather",
+          component: () => import("../views/admin/weather/Weather.vue"),
+        },
+        {
+          name: "profile",
+          path: "profile",
+          component: () => import("../views/admin/profile/Profile.vue"),
+        },
       ],
     },
   ],

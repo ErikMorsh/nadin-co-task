@@ -9,10 +9,5 @@ export const useSidebarStore = defineStore("sidebar-store", () => {
     drawerState.value = !drawerState.value;
   }
 
-  // Getters
-  function getDrawerState(): boolean {
-    return drawerState.value;
-  }
-
-  return { toggleDrawer, getDrawerState };
+  return { toggleDrawer, drawerState };
 });

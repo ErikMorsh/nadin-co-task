@@ -11,10 +11,10 @@ import * as directives from "vuetify/directives";
 const vuetify = createVuetify({
   defaults: {
     // TODO: maybe more costomizaiton on VSelect component
-    VSelectSmall: {
-      style: [{ width: "100px" }],
-      class: [],
-    },
+    // VSelectSmall: {
+    //   style: [{ width: "100px" }],
+    //   class: [],
+    // },
   },
 
   components,

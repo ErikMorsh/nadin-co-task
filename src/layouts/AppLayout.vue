@@ -7,7 +7,7 @@
     <!-- temporary -->
     <v-navigation-drawer
       color="backgroundSecondary"
-      v-model="drawerState"
+      v-model="sidebarStore.drawerState"
       :temporary="smAndDown"
       :width="350"
     >
@@ -15,10 +15,10 @@
     </v-navigation-drawer>
 
     <v-main>
-      <!-- <AppLayoutNavigation
-        @toggle-sidebar="toggleSidebar"
-        :drawerState="drawerState"
-      /> -->
+      <ContentLayoutNavigation
+        @toggle-sidebar="handleContentDrawerBtn"
+        :drawerState="sidebarStore.drawerState"
+      />
       <div>
         <RouterView />
       </div>
@@ -29,15 +29,14 @@
 <script setup lang="ts">
 import AppNavbar from "../components/navbar/AppNavbar.vue";
 import AppSidebar from "../components/sidebar/AppSidebar.vue";
-
-import { computed } from "vue";
+import ContentLayoutNavigation from "@/components/content-layout-navigation/ContentLayoutNavigation.vue";
 
 import { useSidebarStore } from "@/stores/sidebar/sidebar-store";
 const sidebarStore = useSidebarStore();
 
-const drawerState = computed<boolean>(() => {
-  return sidebarStore.getDrawerState();
-});
+function handleContentDrawerBtn() {
+  sidebarStore.toggleDrawer();
+}
 
 import { useDisplay } from "vuetify";
 const { smAndDown } = useDisplay();
