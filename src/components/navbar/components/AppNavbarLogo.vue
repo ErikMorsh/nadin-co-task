@@ -1,7 +1,7 @@
 <template>
   <div class="vuetify-icon ml-2 ml-sm-5 d-flex align-center">
     <p class="vuetify-icon-text text-caption text-sm-h6 font-weight-bold">
-      Vuetify
+      Nadin Co
     </p>
     <div>
       <p
@@ -10,7 +10,7 @@
           'font-size': false ? '0.6em' : '',
         }"
       >
-        admin
+        task
       </p>
     </div>
   </div>

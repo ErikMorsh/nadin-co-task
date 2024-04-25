@@ -7,7 +7,7 @@
     </v-btn>
 
     <!-- TODO: will be dynamic after setting routes -->
-    <p>Home / Dashboard</p>
+    <p class="text-capitalize">Home / {{ route.name }}</p>
 
     <!-- TODO: print last path in url in big title -->
   </div>
@@ -26,9 +26,14 @@ function handleDrawerBtn() {
   emits("toggle-sidebar");
 }
 
+import { watch } from "vue";
 // Break Point
 import { useDisplay } from "vuetify";
 const { smAndDown } = useDisplay();
+
+// _________________________________Update Active Link Above the Content Part
+import { useRoute } from "vue-router";
+const route = useRoute();
 </script>
 
 <style scoped></style>

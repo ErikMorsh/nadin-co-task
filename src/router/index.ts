@@ -7,7 +7,20 @@ const router = createRouter({
   routes: [
     {
       path: "/:pathMatch(.*)*",
-      redirect: { name: "dashboard" },
+      redirect: { name: "register" },
+    },
+    {
+      name: "register",
+      path: "/",
+      component: LoginLayout,
+      redirect: { name: "login" },
+      children: [
+        {
+          name: "login",
+          path: "login",
+          component: () => import("../views/register/login/Login.vue"),
+        },
+      ],
     },
     {
       name: "admin",
@@ -34,19 +47,6 @@ const router = createRouter({
           name: "profile",
           path: "profile",
           component: () => import("../views/admin/profile/Profile.vue"),
-        },
-      ],
-    },
-    {
-      name: "register",
-      path: "/",
-      component: LoginLayout,
-      redirect: { name: "login" },
-      children: [
-        {
-          name: "login",
-          path: "login",
-          component: () => import("../views/register/login/Login.vue"),
         },
       ],
     },
