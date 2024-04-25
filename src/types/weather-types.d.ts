@@ -5,3 +5,9 @@ export type IranData = {
 };
 
 export type RequestState = "not-set" | "loading" | "ok";
+
+export type WeatherData = {
+  requestState: RequestState;
+  choosenCity: string;
+  weather: any;
+};

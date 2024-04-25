@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, type Ref } from "vue";
 import { useDisplay, useTheme } from "vuetify";
 import { Temporal } from "temporal-polyfill";
 
@@ -29,6 +29,12 @@ export const useGlobalStore = defineStore("global-store", () => {
     // change theme itself
     real_theme.global.name.value = theme.value;
   }
+  function setTheme(newTheme: ThemeTypes): void {
+    theme.value = newTheme;
+
+    // change theme itself
+    real_theme.global.name.value = theme.value;
+  }
 
   // Time and Date
   const time = ref<string>();
@@ -39,8 +45,8 @@ export const useGlobalStore = defineStore("global-store", () => {
   }, 30000);
 
   // Getters
-  function getTheme(): ThemeTypes {
-    return theme.value;
+  function getTheme(): Ref<ThemeTypes> {
+    return theme;
   }
   function getTime() {
     return time.value;
@@ -49,5 +55,5 @@ export const useGlobalStore = defineStore("global-store", () => {
     return mobile.value;
   }
 
-  return { getTime, getTheme, toggleTheme, getIsMobile, setPageSize };
+  return { getTime, getTheme, toggleTheme, setTheme, getIsMobile, setPageSize };
 });

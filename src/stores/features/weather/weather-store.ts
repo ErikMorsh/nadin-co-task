@@ -1,48 +1,26 @@
 import { defineStore } from "pinia";
-import { reactive, ref, type Ref } from "vue";
+import { reactive, ref, watch, type Ref } from "vue";
 
-import type { IranData, RequestState } from "@/types/weather-types";
+import type { WeatherData } from "@/types/weather-types";
+import { useIranCitiesStore } from "@/stores/iranCities-store";
+import { useProfileStore } from "@/stores/profile-store";
 
 export const useWeatherStore = defineStore("weather-store", () => {
-  const IranCitiesData = reactive<IranData[]>([]);
-  const cities = reactive<string[]>([]);
-  fetch("ir.json")
-    .then((response) => response.json())
-    .then((json: IranData[]) => {
-      json.map((item) => {
-        IranCitiesData.push(item);
-        cities.push(item.city);
-      });
-    });
+  const { IranCitiesData, cities } = useIranCitiesStore();
+  const { userData } = useProfileStore();
 
-  const choosenCity = ref<string>("");
-  const requestState = ref<RequestState>(
-    choosenCity.value == "" ? "not-set" : "ok"
-  );
-
-  function setRequestState(state: RequestState) {
-    console.log(state);
-    requestState.value = state;
-  }
-  function getRequestState(): Ref<RequestState> {
-    return requestState;
-  }
-
-  function setChoosenCity(city: string) {
-    choosenCity.value = city;
-  }
-
-  function getChoosenCity(): Ref<string> {
-    return choosenCity;
-  }
+  const weatherData = reactive<WeatherData>({
+    choosenCity: "",
+    requestState: userData.city == "" ? "not-set" : "ok",
+    weather: undefined,
+  });
+  watch(userData, () => {
+    weatherData.choosenCity = userData.city;
+  });
 
   return {
     IranCitiesData,
     cities,
-    getRequestState,
-    setRequestState,
-    choosenCity,
-    getChoosenCity,
-    setChoosenCity,
+    weatherData,
   };
 });
