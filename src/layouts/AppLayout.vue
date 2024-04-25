@@ -1,4 +1,5 @@
 <template>
+  <WelcomePrompt />
   <v-layout class="rounded rounded-md">
     <v-system-bar class="pa-0" color="backgroundSecondary" height="70">
       <AppNavbar />
@@ -30,6 +31,7 @@
 import AppNavbar from "../components/navbar/AppNavbar.vue";
 import AppSidebar from "../components/sidebar/AppSidebar.vue";
 import ContentLayoutNavigation from "@/components/content-layout-navigation/ContentLayoutNavigation.vue";
+import WelcomePrompt from "@/components/welcome-prompt/WelcomePrompt.vue";
 
 import { useSidebarStore } from "@/stores/sidebar/sidebar-store";
 const sidebarStore = useSidebarStore();
