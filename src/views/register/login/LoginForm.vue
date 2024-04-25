@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <h1 class="text-backgroundPrimary">Hi Dear Guest! Login to enjoy.</h1>
+    <h1 class="text-backgroundPrimary text-caption text-sm-h4">
+      Hi Dear Guest! Login to enjoy.
+    </h1>
     <router-link :to="{ name: 'dashboard' }">
       <v-btn v-ripple class="button mt-10"> Log In </v-btn>
     </router-link>
@@ -11,7 +13,7 @@
 
 <style scoped>
 .card {
-  width: 500px;
+  width: 70%;
   padding-top: 50px;
   padding-bottom: 50px;
 
