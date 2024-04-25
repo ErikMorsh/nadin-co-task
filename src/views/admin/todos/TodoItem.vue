@@ -5,8 +5,8 @@
     rounded
   >
     <div class="d-flex align-center">
-      <h2 class="text-h6 ml-4 font-weight-bold text-orange">{{ index }}.</h2>
-      <h2 class="text-h6 ml-2 font-weight-bold text-orange">{{ title }}</h2>
+      <h5 class="ml-4 font-weight-bold text-orange">{{ index }}.</h5>
+      <h5 class="ml-2 font-weight-bold text-orange">{{ title }}</h5>
       <p class="d-none d-sm-inline text-body-2 ml-5">
         {{ desc?.slice(0, 30) }} ...
       </p>
@@ -20,8 +20,8 @@
             icon
             variant="tonal"
             color="orange"
-            size="small"
             v-bind="activatorProps"
+            :size="btnSize"
           >
             <v-icon>mdi-eye-outline</v-icon>
           </v-btn>
@@ -29,7 +29,7 @@
         <template v-slot:default="{ isActive }">
           <v-card class="text-center">
             <v-card-title>
-              <h1 class="text-h4 ma-5 font-weight-bold text-orange">
+              <h1 class="text-h6 text-sm-h4 ma-5 font-weight-bold text-orange">
                 {{ title }}
               </h1>
             </v-card-title>
@@ -46,7 +46,7 @@
         icon
         variant="tonal"
         color="success"
-        size="small"
+        :size="btnSize"
         @click="handleEditForm"
       >
         <v-icon>mdi-pencil</v-icon>
@@ -60,7 +60,7 @@
         icon
         variant="tonal"
         color="danger"
-        size="small"
+        :size="btnSize"
         @click="handleDeleteBtn"
       >
         <v-icon>mdi-delete-outline</v-icon>
@@ -70,14 +70,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import TodoForm from "./TodoForm.vue";
+import vuetify from "@/plugins/vuetify";
+
+const { display } = vuetify;
 
 const { index, id, title, desc } = defineProps({
   index: Number,
   id: Number,
   title: String,
   desc: String,
+});
+
+const btnSize = computed(() => {
+  return display.smAndDown.value
+    ? "x-small"
+    : display.lgAndUp.value
+    ? "x-small"
+    : "small";
 });
 
 const emit = defineEmits(["delete-todo"]);

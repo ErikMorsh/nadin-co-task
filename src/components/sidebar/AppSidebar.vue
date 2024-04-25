@@ -46,7 +46,9 @@
             'bg-backgroundLinkPrimary': option.selfStatus,
           }"
         >
-          <v-icon class="text-faintedText">mdi-{{ option.icon }}</v-icon>
+          <v-icon :color="option.selfStatus ? 'primary' : 'faintedText'"
+            >mdi-{{ option.icon }}</v-icon
+          >
           <p
             class="text-capitalize ml-2"
             :class="{
@@ -86,9 +88,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from "vue";
+import { reactive, watch } from "vue";
+import { useRoute } from "vue-router";
 
-import navigationRoutes from "./NavigationRoutes";
+const route = useRoute();
+
 // Next I will extract routes and map them into options obj below
 
 interface IChildLink {
@@ -172,6 +176,24 @@ const options: IOption[] = reactive([
     selfStatus: false,
   },
 ]);
+
+// _________________________________Update Active Link
+// Initialization
+updateOptionSelfStatus();
+// On Each Change
+watch(route, (val) => {
+  updateOptionSelfStatus();
+});
+
+function updateOptionSelfStatus() {
+  options.map((option) => {
+    if (option.name == route.name) {
+      option.selfStatus = true;
+    } else {
+      option.selfStatus = false;
+    }
+  });
+}
 
 const hasActiveChild = (children: IChildLink[]): boolean => {
   for (const child of children) {

@@ -25,7 +25,7 @@
                 class="mt-2 mb-5"
                 type="submit"
                 variant="tonal"
-                color="success"
+                color="primary"
                 block
                 >{{ todoIndex === -1 ? "Add" : "Edit" }}</v-btn
               >
@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onBeforeUpdate, reactive, ref, type Ref } from "vue";
+import { onBeforeUpdate, reactive, ref, type Ref } from "vue";
 import { useTodoStore } from "@/stores/features/todo/todo-store";
 
 const model = defineModel<boolean>();

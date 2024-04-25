@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AppLayout from "../layouts/AppLayout.vue";
+import LoginLayout from "../layouts/LoginLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,19 @@ const router = createRouter({
           name: "profile",
           path: "profile",
           component: () => import("../views/admin/profile/Profile.vue"),
+        },
+      ],
+    },
+    {
+      name: "register",
+      path: "/",
+      component: LoginLayout,
+      redirect: { name: "login" },
+      children: [
+        {
+          name: "login",
+          path: "login",
+          component: () => import("../views/register/login/Login.vue"),
         },
       ],
     },

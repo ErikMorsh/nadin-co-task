@@ -25,7 +25,8 @@
     class="todo-add"
     icon
     variant="flat"
-    color="success"
+    color="primary"
+    size="x-large"
   >
     <v-icon>mdi-plus</v-icon>
   </v-btn>
@@ -57,7 +58,7 @@ function handleFormBtn() {
 <style scoped>
 .todo-add {
   position: fixed;
-  bottom: 80px;
-  right: 20px;
+  bottom: 40px;
+  right: 40px;
 }
 </style>

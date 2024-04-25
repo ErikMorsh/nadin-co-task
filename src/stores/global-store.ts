@@ -1,9 +1,13 @@
 import { defineStore } from "pinia";
-import { computed, ref, watch, type Ref } from "vue";
+import { ref, type Ref } from "vue";
 import { useDisplay, useTheme } from "vuetify";
 import { Temporal } from "temporal-polyfill";
 
 import type { ThemeTypes } from "../types/theme-types";
+
+import { useProfileStore } from "./profile-store";
+import { useWeatherStore } from "./features/weather/weather-store";
+import { useTodoStore } from "./features/todo/todo-store";
 
 export const useGlobalStore = defineStore("global-store", () => {
   // Themeing
@@ -39,10 +43,21 @@ export const useGlobalStore = defineStore("global-store", () => {
   // Time and Date
   const time = ref<string>();
   time.value = Temporal.Now.plainTimeISO().toString().slice(0, 5);
-  console.log(Temporal.Now.plainTimeISO().toString().slice(0, 5));
+
   setInterval(() => {
     time.value = Temporal.Now.plainTimeISO().toString().slice(0, 5);
   }, 30000);
+
+  // CLEAR STORES
+  function clearAllStores() {
+    const { clearUserStore } = useProfileStore();
+    const { clearWeatherStore } = useWeatherStore();
+    const { clearTodoStore } = useTodoStore();
+
+    clearUserStore();
+    clearWeatherStore();
+    clearTodoStore();
+  }
 
   // Getters
   function getTheme(): Ref<ThemeTypes> {
@@ -55,5 +70,13 @@ export const useGlobalStore = defineStore("global-store", () => {
     return mobile.value;
   }
 
-  return { getTime, getTheme, toggleTheme, setTheme, getIsMobile, setPageSize };
+  return {
+    getTime,
+    getTheme,
+    toggleTheme,
+    setTheme,
+    getIsMobile,
+    setPageSize,
+    clearAllStores,
+  };
 });
